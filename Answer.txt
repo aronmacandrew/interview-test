@@ -1,0 +1,7 @@
+How do you like Prototype, jQuery and raw Javascript? Which one do you like best, why?
+
+1. If I was a client to manage a web application, I would take jQuery because it's easy for anyone to maintain the web application developed by another developer. Also it's good at animation also.
+2. As a developer, I recommend prototype as it's easy for developers to work with that. Of course it's easy for me to work with jQuery, but prototype allow me to create clean and structured code.
+3. Javascript is base of Jquery and Prototype. But I think using raw javascript will consume much more than using other libraries such as jQuery and prototype.
+
+Finally I prefer to work with prototype.
