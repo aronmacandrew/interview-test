@@ -27,7 +27,6 @@ class Rover
 	end
 
 	def left
-		p @directions.index(@dir)
 		@dir = @directions[(@directions.index(@dir) + 3) % 4]
 	end
 
@@ -61,7 +60,6 @@ class Robert
 	end
 
 	def land(position)
-		p "Landed to " + position
 		@rover.set_position(position.split(" ")[0].to_i, position.split(" ")[1].to_i, position.split(" ")[2])
 	end
 
@@ -89,7 +87,6 @@ class Robert
 			go(instruction)
 		end
 		p "Destination is : <" + rover.get_position + ">"
-		p
 	end
 
 end
@@ -98,35 +95,38 @@ end
 # => Definition of Application
 class Application
 
-	attr_accessor :roberts
+	attr_accessor :roberts, :lines
 
 	def initialize
 		@roberts = []
-		lines = []
-		index = 0
+		@lines = []
+		read_from_file
+	end
+
+	def read_from_file
 		File.open("instruction.txt", "r").each_line do |line|
-			lines[index] = line[0,line.index("\n")||line.length]
-			index += 1
+			@lines << line
 		end
 
-		Rover.set_bound(lines[0].split(" ")[0].to_i, lines[0].split(" ")[1].to_i)
+		Rover.set_bound(@lines[0].split(" ")[0].to_i, @lines[0].split(" ")[1].to_i)
 		r1 = Robert.new
-		lines[0]
-		r1.land(lines[1])
-		r1.set_instruction(lines[2])
+		r1.land(@lines[1])
+		r1.set_instruction(@lines[2])
 		@roberts << r1
 
 		r2 = Robert.new
-		r2.land(lines[3])
-		r2.set_instruction(lines[4])
+		r2.land(@lines[3])
+		r2.set_instruction(@lines[4])
 		@roberts << r2
 	end
 
 	def start
 		p "The application is launching"
+
 		@roberts.each do |robert|
 			robert.execute
 		end
+
 		p "Thank you!"
 	end
 
